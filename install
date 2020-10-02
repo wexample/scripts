@@ -1,2 +1,19 @@
 #!/usr/bin/env bash
 
+WEX_DIR_INSTALL="/opt/wex/"
+WEX_BIN="/usr/local/bin/wex"
+
+# Check user is root
+if [ "${EUID}" -gt 0 ];then
+  # Exec as sudo
+  sudo bash ${WEX_DIR_INSTALL}install
+  exit
+fi
+
+chmod -R +x ${WEX_DIR_INSTALL}
+
+rm "${WEX_BIN}"
+ln -s ${WEX_DIR_INSTALL}wex ${WEX_BIN}
+chmod -R +x /usr/local/bin/wex
+
+echo "Install complete!"
