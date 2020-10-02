@@ -10,8 +10,10 @@ if [ "${EUID}" -gt 0 ];then
   exit
 fi
 
+# Set permission on base folder.
 chmod -R +x ${WEX_DIR_INSTALL}
 
+# Create or recreate symlink.
 rm "${WEX_BIN}"
 ln -s ${WEX_DIR_INSTALL}wex ${WEX_BIN}
 chmod -R +x /usr/local/bin/wex
